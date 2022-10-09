@@ -1,0 +1,15 @@
+header {
+    text-align: center;
+    background-color: black;
+    padding: 2rem;
+    border-bottom: 0.1rem solid #EEE;
+}
+
+#header-h1 {
+    color: #EEE;
+    font-size: 2.4rem;
+}
+
+#header-span {
+    color: #E76100;
+}

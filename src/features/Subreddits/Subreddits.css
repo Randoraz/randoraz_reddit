@@ -1,0 +1,11 @@
+#subreddits {
+    background-color: #2b2b2b;
+    color: white;
+    height: 90vh;
+}
+
+#subreddits-list-item {
+    list-style: none;
+    text-align: center;
+    font-size: 2rem;
+}

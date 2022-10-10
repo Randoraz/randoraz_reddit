@@ -1,15 +1,52 @@
 header {
-    text-align: center;
     background-color: black;
     padding: 2rem;
     border-bottom: 0.1rem solid #EEE;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    align-content: center;
+}
+
+#logo-container {
+    display: flex;
+    align-items: center;
 }
 
 #header-h1 {
-    color: #EEE;
     font-size: 2.4rem;
+    color: white;
 }
 
 #header-span {
     color: #E76100;
+}
+
+#reddit-icon {
+    font-size: 3rem;
+    margin-left: 1.6rem;
+    color: #E76100;
+}
+
+#search-form {
+    display: flex;
+}
+
+#search-bar {
+    width: 90%;
+    height: 90%;
+    border-radius: 5px;
+}
+
+#search-bar::placeholder {
+    padding-left: 1rem;
+}
+
+#search-button {
+    margin-left: 1rem;
+    width: 7%;
+    font-size: 3rem;
+    color: white;
+    background-color: transparent;
+    border: none;
 }

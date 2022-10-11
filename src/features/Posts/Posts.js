@@ -1,36 +1,52 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import './Posts.css';
 
 import Post from "../Post/Post";
+import { fetchPosts, loadingPosts, selectPosts, selectSubreddit } from "../../store/redditSlice";
+
 
 const Posts = () => {
-    const posts = [];
+    const dispatch = useDispatch();
+    const posts = useSelector(selectPosts);
+    const isLoading = useSelector(loadingPosts);
+    const subreddit = useSelector(selectSubreddit);
+    
+    useEffect(() => {
+        if(posts.length !== 0)
+            return;
+
+        dispatch(fetchPosts(subreddit));
+    }, [dispatch, posts, subreddit]);
 
     //hardcoded data
-    const post1 = {
-        title: 'Cute dogs',
-        image: 'https://static.boredpanda.com/blog/wp-content/uploads/2016/06/sausage-dog-maternity-photoshoot-puppies-fb.png',
-        postTime: '2 hours ago',
-        op: 'Sliu Sliu Nham Nham',
-        upvotes: 100
-    };
+    // const post1 = {
+    //     title: 'Cute dogs',
+    //     url: 'https://static.boredpanda.com/blog/wp-content/uploads/2016/06/sausage-dog-maternity-photoshoot-puppies-fb.png',
+    //     created_utc: '2 hours ago',
+    //     author: 'Sliu Sliu Nham Nham',
+    //     ups: 100
+    // };
 
-    const post2 = {
-        title: 'Cute cats',
-        image: 'https://i.pinimg.com/736x/52/c4/86/52c486ac9b5c6e3a130c6eb852333fdb.jpg',
-        postTime: '1 hour ago',
-        op: 'JokerGamer',
-        upvotes: 90
-    };
+    // const post2 = {
+    //     title: 'Cute cats',
+    //     url: 'https://i.pinimg.com/736x/52/c4/86/52c486ac9b5c6e3a130c6eb852333fdb.jpg',
+    //     created_utc: '1 hour ago',
+    //     author: 'JokerGamer',
+    //     ups: 90
+    // };
 
-    posts.push(post1);
-    posts.push(post2);
+    // posts.push(post1);
+    // posts.push(post2);
 
+
+    //if(isLoading) return <div id="posts"><p>Loading...</p></div>;
+    if(posts.length === 0) return null;
 
     return (
         <div id="posts">
             {posts.map(post => {
-                return <Post post={post} />
+                return <Post post={post} key={post.id}/>
             })}
         </div>
     )

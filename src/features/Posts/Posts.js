@@ -3,21 +3,19 @@ import { useDispatch, useSelector } from "react-redux";
 import './Posts.css';
 
 import Post from "../Post/Post";
-import { fetchPosts, loadingPosts, selectPosts, selectSubreddit } from "../../store/redditSlice";
+import { fetchPosts, loadingPosts, errorPosts, selectPosts, selectSubreddit } from "../../store/redditSlice";
 
 
 const Posts = () => {
     const dispatch = useDispatch();
     const posts = useSelector(selectPosts);
     const isLoading = useSelector(loadingPosts);
+    const error = useSelector(errorPosts);
     const subreddit = useSelector(selectSubreddit);
     
     useEffect(() => {
-        if(posts.length !== 0)
-            return;
-
         dispatch(fetchPosts(subreddit));
-    }, [dispatch, posts, subreddit]);
+    }, [subreddit]);
 
     //hardcoded data
     // const post1 = {

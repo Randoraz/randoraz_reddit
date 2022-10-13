@@ -1,12 +1,13 @@
 import React from "react";
 import './Post.css';
+import { fixUrl } from "../../util/utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Post = ({post}) => {
     const title = post.title;
     const postMetadata = post.media_metadata ? post.media_metadata : null;
     const postUrl = post.url ? post.url : null;
-    const postEmbed = post.media_embed ? post.media_embed.content : null;
+    const postEmbed = post.media ? post.media : null; // We have to use 'media' because videos are not in the 'media_embed' key
     const postTime = post.created_utc;
     const author = post.author;
     const upvotes = post.ups;
@@ -16,55 +17,68 @@ const Post = ({post}) => {
         url: '',
         title: ''
     };
+    let link;
     if(postMetadata) {
         Object.keys(postMetadata).forEach((image) => {
-            const fixedUrl = postMetadata[image].s.u.replaceAll('&amp;', '&');
+            const fixedUrl = fixUrl(postMetadata[image].s.u);
             images.push(fixedUrl);
         });
     } else if(post.url) {
-        images.push(post.url);
+        if(post.url.includes('.gif') || post.url.includes('.jpg') || post.url.includes('.jpeg') || post.url.includes('.png') || post.url.includes('.webp'))
+            images.push(post.url);
+        else
+            link = post.url;
     }
     
     if(postEmbed) {
-        const initialIndex = postEmbed.indexOf('src') + 5;
-        const finalIndex = postEmbed.indexOf('width') - 2 - postEmbed.length;
-        video.url = postEmbed.slice(initialIndex, finalIndex);
-        video.url = video.url.replaceAll('&amp;', '&');
-        video.title = post.media.oembed.title;
+        if(postEmbed.oembed) {
+            const html = postEmbed.oembed.html;
+            const initialIndex = html.indexOf('src') + 5;
+            const finalIndex = html.indexOf('width') - 2 - html.length;
+            video.url = html.slice(initialIndex, finalIndex);
+            video.url = video.url.replaceAll('&amp;', '&');
+            video.title = post.media.oembed.title;
+        } else if(postEmbed.reddit_video) {
+            const url = postEmbed.reddit_video.fallback_url;
+            video.url = fixUrl(url);
+            video.title = '';
+        }
     }
 
-    const imgContainer = <div id="img-container">{
+    const imgContainer = <div className="img-container">{
                             images.map((image, index) => {
-                                return <img id="post-img" alt="" src={image} key={index} />;
+                                return <img className="post-img" alt="" src={image} key={index} />;
                             })
                         }</div>;
 
-    const videoContainer = <div id="video-container">
+    const videoContainer = <div className="video-container">
                                 <iframe 
                                     src={video.url} 
                                     title={video.title}
-                                    width="600px"
-                                    height="338px"
+                                    width="900px"
+                                    height="507px"
                                     scrolling="no"
                                     frameBorder="0"
                                     allow="autoplay; fullscreen"
                                     allowFullScreen={true}></iframe>
                         </div>
     
+    const linkElement = <a className="external-link" href={link} target="_blank">{link}</a>
+    
     return (
-        <div id="post">
-            <div id="upvotes-container">
+        <div className="post">
+            <div className="upvotes-container">
                 <FontAwesomeIcon className="vote-icon" icon="fa-regular fa-circle-up" />
-                <p id="upvotes-number">{upvotes}</p>
+                <p className="upvotes-number">{upvotes}</p>
                 <FontAwesomeIcon className="vote-icon" icon="fa-regular fa-circle-down" />
             </div>
-            <div id="post-container">
-                <h2 id="post-h2">{title}</h2>
-                {postEmbed ? videoContainer : imgContainer}
-                <div id="post-info">
-                    <p id="op">Posted by {author}</p>
-                    <p id="post-time">{postTime}</p>
-                    <FontAwesomeIcon id="comment-icon" icon="fa-solid fa-message" />
+            <div className="post-container">
+                <h2 className="post-h2">{title}</h2>
+                {postEmbed ? videoContainer : images.length > 0 ? imgContainer : link.length > 0 && linkElement}
+                <div className="post-info">
+                    <p className="op">Posted by {author}</p>
+                    <p className="post-time">{postTime}</p>
+                    <FontAwesomeIcon className="comment-icon" icon="fa-solid fa-message" />
                 </div>
             </div>
         </div>

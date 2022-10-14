@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import './Posts.css';
 
 import Post from "../Post/Post";
-import { fetchPosts, loadingPosts, errorPosts, selectPosts, selectSubreddit } from "../../store/redditSlice";
+import { fetchPosts, loadingPosts, errorPosts, selectFilteredPosts, selectSubreddit } from "../../store/redditSlice";
 
 
 const Posts = () => {
     const dispatch = useDispatch();
-    const posts = useSelector(selectPosts);
+    const posts = useSelector(selectFilteredPosts);
     const isLoading = useSelector(loadingPosts);
     const error = useSelector(errorPosts);
     const subreddit = useSelector(selectSubreddit);
@@ -39,7 +39,11 @@ const Posts = () => {
 
 
     //if(isLoading) return <div id="posts"><p>Loading...</p></div>;
-    if(posts.length === 0) return null;
+    const loading = <p id="loading-posts-message">Loading posts...</p>;
+    const noPosts = <p id="no-posts-message">No posts matching the search term where found</p>
+
+    if(isLoading) return loading;
+    if(posts.length === 0) return noPosts;
 
     return (
         <div id="posts">

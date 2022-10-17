@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import { getRedditPosts } from '../api/reddit';
+import { getRedditPosts, getPostComments } from '../api/reddit';
 
 export const redditSlice = createSlice({
     name: 'redditSlice',
@@ -27,6 +27,9 @@ export const redditSlice = createSlice({
             } else {
                 state.filteredPosts = [];
             }
+        },
+        setShowingComments(state, action) {
+            state.filteredPosts[action.payload].showingComments = !state.filteredPosts[action.payload].showingComments;
         }
     },
     extraReducers: (builder) => {
@@ -40,6 +43,17 @@ export const redditSlice = createSlice({
                 state.loading = false;
                 state.error = false;
                 state.posts = action.payload;
+
+                state.posts = state.posts.map(post => {
+                    return {
+                        ...post,
+                        showingComments: false,
+                        comments: [],
+                        loadingComments: false,
+                        errorComments: false
+                    }
+                });
+                
                 state.filteredPosts = state.posts;
             })
 
@@ -47,13 +61,31 @@ export const redditSlice = createSlice({
                 state.loading = false;
                 state.error = true;
             });
+
+        builder
+            .addCase(fetchComments.pending, (state, action) => {
+                state.posts[action.meta.arg.index].loadingComments = true;
+                state.posts[action.meta.arg.index].errorComments = false;
+            })
+
+            .addCase(fetchComments.fulfilled, (state, action) => {
+                state.posts[action.payload.index].loadingComments = false;
+                state.posts[action.payload.index].errorComments = false;
+                state.posts[action.payload.index].comments = action.payload.comments;
+            })
+
+            .addCase(fetchComments.rejected, (state, action) => {
+                state.posts[action.meta.arg.index].loadingComments = false;
+                state.posts[action.meta.arg.index].errorComments = true;
+            });
     }
 });
 
 export const {
     setSubreddit,
     setSearchTerm,
-    getFilteredPosts
+    getFilteredPosts,
+    setShowingComments
 } = redditSlice.actions;
 
 export default redditSlice.reducer;
@@ -73,3 +105,13 @@ export const fetchPosts = createAsyncThunk(
         return posts;
     }
 );
+
+export const fetchComments = createAsyncThunk(
+    'redditSlice/fetchComments',
+    async (postData) => {
+        console.log(postData);
+        const {index, permalink} = postData;
+        const comments = await getPostComments(permalink);
+        return {index, comments};
+    }
+)

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import './Posts.css';
 
 import Post from "../Post/Post";
-import { fetchPosts, loadingPosts, errorPosts, selectFilteredPosts, selectSubreddit } from "../../store/redditSlice";
+import { fetchPosts, loadingPosts, errorPosts, selectFilteredPosts, selectSubreddit, fetchComments, setShowingComments } from "../../store/redditSlice";
 
 
 const Posts = () => {
@@ -16,6 +16,19 @@ const Posts = () => {
     useEffect(() => {
         dispatch(fetchPosts(subreddit));
     }, [subreddit]);
+
+    const toggleShowingComments = (index) => {
+        const getComments = (permalink) => {
+            const postData = {index, permalink};
+            
+            dispatch(setShowingComments(index));
+
+            if(!posts[index].showingComments)
+                dispatch(fetchComments(postData));
+        }
+
+        return getComments;
+    }
 
     //hardcoded data
     // const post1 = {
@@ -47,8 +60,8 @@ const Posts = () => {
 
     return (
         <div id="posts">
-            {posts.map(post => {
-                return <Post post={post} key={post.id}/>
+            {posts.map((post, index) => {
+                return <Post post={post} key={post.id} toggleShowingComments={toggleShowingComments(index)} />
             })}
         </div>
     )

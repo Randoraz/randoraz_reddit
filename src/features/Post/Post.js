@@ -1,12 +1,15 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import './Post.css';
 import { fixUrl } from "../../util/utils";
+import { Comment } from "../Comment/Comment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Post = ({post}) => {
+const Post = ({post, toggleShowingComments}) => {
+const dispatch = useDispatch();
+
     const title = post.title;
     const postMetadata = post.media_metadata ? post.media_metadata : null;
-    const postUrl = post.url ? post.url : null;
     const postEmbed = post.media ? post.media : null; // We have to use 'media' because videos are not in the 'media_embed' key
     const postTime = post.created_utc;
     const author = post.author;
@@ -63,24 +66,40 @@ const Post = ({post}) => {
                                     allowFullScreen={true}></iframe>
                         </div>
     
-    const linkElement = <a className="external-link" href={link} target="_blank">{link}</a>
+    const linkElement = <a className="external-link" href={link} target="_blank">{link}</a>;
+
+    const renderComments = () => {
+        if(!post.showingComments)
+            return;
+
+        if(post.showingComments.errorComments)
+            return <p style={{color: 'white'}}>Failed to load the comments</p>;
+
+        return <p style={{color: 'white'}}>TESTING</p>;
+    }
+
     
     return (
         <div className="post">
-            <div className="upvotes-container">
-                <FontAwesomeIcon className="vote-icon" icon="fa-regular fa-circle-up" />
-                <p className="upvotes-number">{upvotes}</p>
-                <FontAwesomeIcon className="vote-icon" icon="fa-regular fa-circle-down" />
-            </div>
-            <div className="post-container">
-                <h2 className="post-h2">{title}</h2>
-                {postEmbed ? videoContainer : images.length > 0 ? imgContainer : link.length > 0 && linkElement}
-                <div className="post-info">
-                    <p className="op">Posted by {author}</p>
-                    <p className="post-time">{postTime}</p>
-                    <FontAwesomeIcon className="comment-icon" icon="fa-solid fa-message" />
+            <div className="post-flex-container">
+                <div className="upvotes-container">
+                    <FontAwesomeIcon className="vote-icon" icon="fa-regular fa-circle-up" />
+                    <p className="upvotes-number">{upvotes}</p>
+                    <FontAwesomeIcon className="vote-icon" icon="fa-regular fa-circle-down" />
                 </div>
+                <div className="post-container">
+                    <h2 className="post-h2">{title}</h2>
+                    {postEmbed ? videoContainer : images.length > 0 ? imgContainer : link.length > 0 && linkElement}
+                    <div className="post-info">
+                        <p className="op">Posted by {author}</p>
+                        <p className="post-time">{postTime}</p>
+                        <button className="comments-button" onClick={() => toggleShowingComments(post.permalink)}><FontAwesomeIcon className="comment-icon" icon="fa-solid fa-message" /></button>
+                    </div>
+                </div>        
             </div>
+            <div className="comments">
+                {renderComments()}
+            </div>  
         </div>
     )
 }

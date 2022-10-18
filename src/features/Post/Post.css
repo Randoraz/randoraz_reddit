@@ -33,7 +33,7 @@
 
 .post-h2 {
     font-size: 2.4rem;
-    color: #008CE2;
+    color: var(--blue);
     margin: 0.5rem 0 1rem 1.5rem;
 }
 
@@ -51,7 +51,7 @@
 }
 
 .external-link {
-    color: #008CE2;
+    color: var(--blue);
     font-size: 1.6rem;
     margin: 2rem;
 }
@@ -68,8 +68,8 @@
 }
 
 .op, .post-time {
-    font-size: 1.2rem;
-    color: #E76100;
+    font-size: 1.8rem;
+    color: var(--orange);
 }
 
 .comments-button {
@@ -83,6 +83,12 @@
     color: white;
 }
 
+.comments-message {
+    margin: 1rem;
+    font-size: 1.8rem;
+    color: white;
+}
+
 .comments {
-    border-top: 0.1rem solid #008CE2;
+    border-top: 0.1rem solid var(--blue);
 }

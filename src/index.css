@@ -1,3 +1,8 @@
+:root {
+  --blue: #008CE2;
+  --orange: #E76100 
+}
+
 * {
   margin: 0;
   padding: 0;

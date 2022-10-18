@@ -1,4 +1,4 @@
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, current } from '@reduxjs/toolkit';
 import { getRedditPosts, getPostComments } from '../api/reddit';
 
 export const redditSlice = createSlice({
@@ -64,19 +64,21 @@ export const redditSlice = createSlice({
 
         builder
             .addCase(fetchComments.pending, (state, action) => {
-                state.posts[action.meta.arg.index].loadingComments = true;
-                state.posts[action.meta.arg.index].errorComments = false;
+                state.filteredPosts[action.meta.arg.index].loadingComments = true;
+                state.filteredPosts[action.meta.arg.index].errorComments = false;
+                console.log("pending comments");
             })
 
             .addCase(fetchComments.fulfilled, (state, action) => {
-                state.posts[action.payload.index].loadingComments = false;
-                state.posts[action.payload.index].errorComments = false;
-                state.posts[action.payload.index].comments = action.payload.comments;
+                state.filteredPosts[action.payload.index].loadingComments = false;
+                state.filteredPosts[action.payload.index].errorComments = false;
+                state.filteredPosts[action.payload.index].comments = action.payload.comments;
+                console.log("got comments!");
             })
 
             .addCase(fetchComments.rejected, (state, action) => {
-                state.posts[action.meta.arg.index].loadingComments = false;
-                state.posts[action.meta.arg.index].errorComments = true;
+                state.filteredPosts[action.meta.arg.index].loadingComments = false;
+                state.filteredPosts[action.meta.arg.index].errorComments = true;
             });
     }
 });

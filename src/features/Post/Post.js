@@ -14,6 +14,7 @@ const dispatch = useDispatch();
     const postTime = post.created_utc;
     const author = post.author;
     const upvotes = post.ups;
+    const comments = post.comments;
 
     const images = [];
     const video = {
@@ -72,10 +73,20 @@ const dispatch = useDispatch();
         if(!post.showingComments)
             return;
 
-        if(post.showingComments.errorComments)
-            return <p style={{color: 'white'}}>Failed to load the comments</p>;
+        if(post.loadingComments)
+            return <p className="comments-message">Loading comments...</p>;
 
-        return <p style={{color: 'white'}}>TESTING</p>;
+        if(post.errorComments)
+            return <p className="comments-message">Failed to load the comments</p>;
+        
+        if(comments.length === 0)
+        return <p className="comments-message">No comments</p>;
+
+        return (
+            comments.map(comment => {
+                return <Comment comment={comment} />
+            })
+        );
     }
 
     

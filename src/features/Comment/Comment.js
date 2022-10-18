@@ -2,9 +2,7 @@ import React from "react";
 import ReactMarkdown from "react-markdown";
 import './Comment.css';
 
-const Comment = (props) => {
-    const comment = props;
-
+export const Comment = ({comment}) => {
     return (
         <div className="comment">
             <p className="comment-author">{comment.author}</p>

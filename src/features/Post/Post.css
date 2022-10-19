@@ -1,6 +1,5 @@
 .post {
     background-color: #2b2b2b;
-    padding: 0.5rem;
     margin: 1.2rem auto;
     border-radius: 5px;
 }
@@ -14,11 +13,12 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow-wrap: break-word;
 }
 
 .upvotes-container {
     color: white;
-    padding: 1.2rem 2.4rem 0 1.7rem;
+    padding: 1.5% 2% 0 1.5%;
     text-align: center;
 }
 
@@ -34,17 +34,19 @@
 .post-h2 {
     font-size: 2.4rem;
     color: var(--blue);
-    margin: 0.5rem 0 1rem 1.5rem;
+    margin: 1% 0 2% 0;
+    width: 95%;
+    text-align: justify;
 }
 
 .img-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    width: 95%;
 }
 
 .post-img {
-    max-width: 90%;
+    max-width: 100%;
     text-align: center;
     border-radius: 5px;
     margin-bottom: 1rem;
@@ -54,6 +56,8 @@
     color: var(--blue);
     font-size: 1.6rem;
     margin: 2rem;
+    max-width: 90%;
+    word-wrap: break-word;
 }
 
 .post-info {
@@ -91,4 +95,32 @@
 
 .comments {
     border-top: 0.1rem solid var(--blue);
+}
+
+@media only screen and (max-width: 950px) {
+    .post-h2 {
+        font-size: 2rem;
+    }
+
+    .upvotes-number {
+        font-size: 1.5rem;
+    }
+
+    .vote-icon {
+        font-size: 2rem;
+    }
+}
+
+@media only screen and (max-width: 520px) {
+    .post-container {
+        width: 90%;
+    }
+
+    .external-link {
+        margin: 2rem 0;
+    }
+
+    .op, .post-time {
+        font-size: 1.2rem;
+    }
 }

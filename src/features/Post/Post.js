@@ -102,7 +102,7 @@ const dispatch = useDispatch();
                     <h2 className="post-h2">{title}</h2>
                     {postEmbed ? videoContainer : images.length > 0 ? imgContainer : link.length > 0 && linkElement}
                     <div className="post-info">
-                        <p className="op">Posted by {author}</p>
+                        <p className="op">{author}</p>
                         <p className="post-time">{postTime}</p>
                         <button className="comments-button" onClick={() => toggleShowingComments(post.permalink)}><FontAwesomeIcon className="comment-icon" icon="fa-solid fa-message" /></button>
                     </div>

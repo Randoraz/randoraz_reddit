@@ -31,12 +31,23 @@ html {
 main {
   width: 75%;
   display: inline-block;
-  margin-left: 1.6%;;
+  margin-left: 1.6%;
 }
 
 aside {
   width: 20%;
   float: right;
   margin-right: 1.6%;
-  margin-top: 0.8%;
+  margin-top: 1.6%;
+}
+
+@media only screen and (max-width: 730px) {
+  aside {
+      display: none;
+  }
+
+  main {
+    width: 97%;
+    text-align: center;
+  }
 }

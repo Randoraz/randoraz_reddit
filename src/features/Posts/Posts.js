@@ -53,9 +53,11 @@ const Posts = () => {
 
     //if(isLoading) return <div id="posts"><p>Loading...</p></div>;
     const loading = <p id="loading-posts-message">Loading posts...</p>;
-    const noPosts = <p id="no-posts-message">No posts matching the search term where found</p>
+    const noPosts = <p id="no-posts-message">No posts matching the search term where found</p>;
+    const errorMensage = <p id="error-message">Failed to load posts</p>;
 
     if(isLoading) return loading;
+    if(error) return errorMensage;
     if(posts.length === 0) return noPosts;
 
     return (

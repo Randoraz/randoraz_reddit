@@ -1,4 +1,4 @@
-#loading-posts-message, #no-posts-message {
+#loading-posts-message, #no-posts-message, #error-message {
     color: white;
     font-size: 2rem;
     margin: 2.4rem;

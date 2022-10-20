@@ -1,31 +1,20 @@
 header {
-    background-color: black;
-    padding: 2rem;
+    height: 7vh;
     border-bottom: 0.1rem solid #EEE;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 1rem;
     align-content: center;
-}
-
-#logo-container {
-    display: flex;
-    align-items: center;
-}
-
-#header-h1 {
-    font-size: 2.4rem;
-    color: white;
     position: relative;
     overflow: hidden;
     z-index: 1;
 }
 
-#header-h1::before {
+header::before {
     position: absolute;
     content: '';
     width: 0;
-    height: 100%;
+    height: 7vh;
     background: linear-gradient(to right, var(--blue), #000, var(--blue));
     background-size: 200%;
     animation: hoverOnLogo 1.5s infinite linear;
@@ -41,8 +30,20 @@ header {
     }
 }
 
-#header-h1:hover::before {
+header:hover::before {
     width: 100%;
+}
+
+#logo-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#header-h1 {
+    font-size: 2.4rem;
+    color: white;
 }
 
 #header-span {
@@ -51,12 +52,15 @@ header {
 
 #reddit-icon {
     font-size: 3rem;
-    margin-left: 1.6rem;
+    margin-left: 3.5%;
     color: #E76100;
 }
 
 #search-form {
+    width: 100%;
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #search-bar {
@@ -64,13 +68,37 @@ header {
     height: 90%;
     border-radius: 5px;
     padding-left: 1rem;
+    box-shadow: none;
+    border: none;
+    outline: 0.2rem solid var(--blue);
+}
+
+#search-bar:focus {
+    outline: 0.2rem dashed var(--orange);
+    outline-offset: 0.3rem;
 }
 
 #search-button {
     margin-left: 1rem;
     width: 7%;
-    font-size: 3rem;
+    font-size: 2.4rem;
     color: white;
     background-color: transparent;
     border: none;
+}
+
+@media only screen and (max-width: 1200px) {
+    #header-h1 {
+        font-size: 2rem;
+    }
+
+    header {
+        grid-template-columns: 2fr 2fr 0.5fr;
+    }
+}
+
+@media only screen and (max-width: 520px) {
+    header {
+        grid-template-columns: 2fr 2fr 0.1fr;
+    }
 }

@@ -1,12 +1,10 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import './Post.css';
 import { fixUrl } from "../../util/utils";
 import { Comment } from "../Comment/Comment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Post = ({post, toggleShowingComments}) => {
-const dispatch = useDispatch();
 
     const title = post.title;
     const postMetadata = post.media_metadata ? post.media_metadata : null;
@@ -84,9 +82,16 @@ const dispatch = useDispatch();
 
         return (
             comments.map(comment => {
-                return <Comment comment={comment} />
+                return <Comment comment={comment} key={comment.id} />
             })
         );
+    };
+
+    const changeIconColor = () => {
+        if(post.showingComments)
+            return 'var(--orange)';
+        else
+            return 'white';
     }
 
     
@@ -104,7 +109,9 @@ const dispatch = useDispatch();
                     <div className="post-info">
                         <p className="op">{author}</p>
                         <p className="post-time">{postTime}</p>
-                        <button className="comments-button" onClick={() => toggleShowingComments(post.permalink)}><FontAwesomeIcon className="comment-icon" icon="fa-solid fa-message" /></button>
+                        <button className="comments-button" onClick={() => toggleShowingComments(post.permalink)}>
+                            <FontAwesomeIcon className="comment-icon" icon="fa-solid fa-message" style={{color: changeIconColor()}}/>
+                        </button>
                     </div>
                 </div>        
             </div>

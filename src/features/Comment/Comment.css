@@ -13,3 +13,9 @@
     padding-bottom: 0.5rem;
     border-bottom: 0.1rem solid var(--orange);
 }
+
+@media only screen and (max-width: 520px) {
+    .comment {
+        font-size: 1.2rem;
+    }
+}

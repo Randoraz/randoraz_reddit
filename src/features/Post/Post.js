@@ -1,8 +1,9 @@
 import React from "react";
 import './Post.css';
-import { fixUrl } from "../../util/utils";
+import { fixUrl } from "../../utils/utils";
 import { Comment } from "../Comment/Comment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { convertUnixIntoDate } from "../../utils/utils";
 
 const Post = ({post, toggleShowingComments}) => {
 
@@ -65,7 +66,7 @@ const Post = ({post, toggleShowingComments}) => {
                                     allowFullScreen={true}></iframe>
                         </div>
     
-    const linkElement = <a className="external-link" href={link} target="_blank">{link}</a>;
+    const linkElement = <a className="external-link" href={link} target="_blank" rel="noreferrer" >{link}</a>;
 
     const renderComments = () => {
         if(!post.showingComments)
@@ -108,7 +109,7 @@ const Post = ({post, toggleShowingComments}) => {
                     {postEmbed ? videoContainer : images.length > 0 ? imgContainer : link.length > 0 && linkElement}
                     <div className="post-info">
                         <p className="op">{author}</p>
-                        <p className="post-time">{postTime}</p>
+                        <p className="post-time">{convertUnixIntoDate(postTime)}</p>
                         <button className="comments-button" onClick={() => toggleShowingComments(post.permalink)}>
                             <FontAwesomeIcon className="comment-icon" icon="fa-solid fa-message" style={{color: changeIconColor()}}/>
                         </button>

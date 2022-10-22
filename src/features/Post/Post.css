@@ -20,6 +20,7 @@
 .upvotes-container {
     color: white;
     padding: 1.5% 2% 0 1.5%;
+    width: 5%;
     text-align: center;
 }
 
@@ -36,14 +37,22 @@
     font-size: 2.4rem;
     color: var(--blue);
     margin: 1% 0 1% 0;
-    width: 95%;
+    max-width: 90%;
     text-align: justify;
+}
+
+.post-text {
+    font-size: 1.8rem;
+    max-width: 90%;
+    color: white;
+    text-align: justify;
+    word-wrap: break-word;
 }
 
 .img-container {
     display: flex;
     flex-direction: column;
-    width: 95%;
+    width: 90%;
 }
 
 .post-img {
@@ -56,7 +65,7 @@
 .external-link {
     color: var(--blue);
     font-size: 1.6rem;
-    margin: 2rem;
+    margin: 2rem 0;
     max-width: 90%;
     word-wrap: break-word;
 }

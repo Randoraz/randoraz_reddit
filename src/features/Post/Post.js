@@ -9,7 +9,8 @@ const Post = ({post, toggleShowingComments}) => {
 
     const title = post.title;
     const postMetadata = post.media_metadata ? post.media_metadata : null;
-    const postEmbed = post.media ? post.media : null; // We have to use 'media' because videos are not in the 'media_embed' key
+    const postEmbed = post.media ? post.media : null;
+    const text = post.selftext ? post.selftext : null;
     const postTime = post.created_utc;
     const author = post.author;
     const upvotes = post.ups;
@@ -68,6 +69,8 @@ const Post = ({post, toggleShowingComments}) => {
     
     const linkElement = <a className="external-link" href={link} target="_blank" rel="noreferrer" >{link}</a>;
 
+    const textElement = <p className="post-text">{text}</p>;
+
     const renderComments = () => {
         if(!post.showingComments)
             return;
@@ -106,6 +109,7 @@ const Post = ({post, toggleShowingComments}) => {
                 </div>
                 <div className="post-container">
                     <h2 className="post-h2">{title}</h2>
+                    {text && textElement}
                     {postEmbed ? videoContainer : images.length > 0 ? imgContainer : link.length > 0 && linkElement}
                     <div className="post-info">
                         <p className="op">{author}</p>

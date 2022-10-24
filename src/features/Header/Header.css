@@ -97,8 +97,20 @@ header:hover::before {
     }
 }
 
-@media only screen and (max-width: 520px) {
+@media only screen and (max-width: 630px) {
     header {
         grid-template-columns: 2fr 2fr 0.1fr;
+    }
+}
+
+
+@media only screen and (max-width: 420px) {
+    #header-h1 {
+    text-align: center;
+    width: 65%;
+    }
+
+    #search-bar {
+        height: 50%;
     }
 }

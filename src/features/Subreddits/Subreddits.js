@@ -2,6 +2,7 @@ import React, {useEffect} from "react";
 import './Subreddits.css';
 import { setSubreddit } from "../../store/redditSlice";
 import { fetchSubreddits, selectSubreddits, loadingSubreddits, errorSubreddits } from "../../store/subredditSlice";
+import { selectSubreddit } from "../../store/redditSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const Subreddits = () => {
@@ -10,6 +11,7 @@ const Subreddits = () => {
     const subreddits = useSelector(selectSubreddits);
     const isLoading = useSelector(loadingSubreddits);
     const error = useSelector(errorSubreddits);
+    const selectedSubreddit = useSelector(selectSubreddit);
 
     useEffect(() => {
         if(subreddits.length !== 0)
@@ -17,16 +19,6 @@ const Subreddits = () => {
 
         dispatch(fetchSubreddits());
     }, [dispatch, subreddits]);
-
-    const changeSelectedColor = (e) => {
-        const buttons = document.querySelectorAll('.subreddits-button');
-        const buttonsArray = Array.from(buttons);
-        buttonsArray.forEach(button => {
-            button.style.color = 'white';
-        });
-
-        e.target.style.color = 'var(--orange)';
-    }
 
     if(isLoading) return <p id="loading-message">Loading...</p>;
     if(error) return <p id="error-message">Failed to load subreddits list</p>;
@@ -39,8 +31,8 @@ const Subreddits = () => {
                 return <li key={subreddit.id} className="subreddits-list-item">
                         <button
                             type="button"
-                            className="subreddits-button"
-                            onClick={(e) => {dispatch(setSubreddit(subreddit.url)); changeSelectedColor(e);}}>
+                            className={`subreddits-button ${selectedSubreddit === subreddit.url && 'selected-subreddit'}`}
+                            onClick={(e) => dispatch(setSubreddit(subreddit.url))}>
                                 <img
                                     className="subreddits-img"
                                     alt=""

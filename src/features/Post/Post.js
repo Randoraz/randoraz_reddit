@@ -1,11 +1,13 @@
 import React from "react";
+import { useState } from "react";
 import './Post.css';
-import { fixUrl } from "../../utils/utils";
+import { fixUrl, shortenNumbers } from "../../utils/utils";
 import { Comment } from "../Comment/Comment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { convertUnixIntoDate } from "../../utils/utils";
 
 const Post = ({post, toggleShowingComments}) => {
+    const [voteStatus, setVoteStatus] = useState('noVote');
 
     const title = post.title;
     const postMetadata = post.media_metadata ? post.media_metadata : null;
@@ -98,15 +100,67 @@ const Post = ({post, toggleShowingComments}) => {
             return 'white';
     }
 
+    const handleUpVote = () => {
+        if(voteStatus === 'upVote')
+            setVoteStatus('noVote')
+        else
+            setVoteStatus('upVote');;
+    }
+
+    const handleDownVote = () => {
+        if(voteStatus === 'downVote')
+            setVoteStatus('noVote');
+        else
+            setVoteStatus('downVote');
+    }
+
+    const renderVoteSection = () => {
+        switch(voteStatus) {
+            case 'noVote':
+                return(
+                    <div className="upvotes-container">
+                        <button className="upvote-button" onClick={() => handleUpVote()}>
+                            <FontAwesomeIcon className="vote-icon" icon="fa-regular fa-circle-up" />
+                        </button>
+                        <p className="upvotes-number">{shortenNumbers(upvotes)}</p>
+                        <button className="downvote-button" onClick={() => handleDownVote()}>
+                            <FontAwesomeIcon className="vote-icon" icon="fa-regular fa-circle-down" />
+                        </button>
+                    </div>
+                );
+            case 'upVote':
+                return(
+                    <div className="upvotes-container">
+                        <button className="upvote-button" onClick={() => handleUpVote()}>
+                            <FontAwesomeIcon className="vote-icon up-vote" icon="fa-regular fa-circle-up" />
+                        </button>
+                        <p className="upvotes-number up-vote">{shortenNumbers(upvotes)}</p>
+                        <button className="downvote-button" onClick={() => handleDownVote()}>
+                            <FontAwesomeIcon className="vote-icon" icon="fa-regular fa-circle-down" />
+                        </button>
+                    </div>
+                );
+            case 'downVote':
+                return(
+                    <div className="upvotes-container">
+                        <button className="upvote-button" onClick={() => handleUpVote()}>
+                            <FontAwesomeIcon className="vote-icon" icon="fa-regular fa-circle-up" />
+                        </button>
+                        <p className="upvotes-number down-vote">{shortenNumbers(upvotes)}</p>
+                        <button className="downvote-button" onClick={() => handleDownVote()}>
+                            <FontAwesomeIcon className="vote-icon down-vote" icon="fa-regular fa-circle-down" />
+                        </button>
+                    </div>
+                );
+            default:
+                return null;
+        }
+    }
     
     return (
         <div className="post">
             <div className="post-flex-container">
-                <div className="upvotes-container">
-                    <FontAwesomeIcon className="vote-icon" icon="fa-regular fa-circle-up" />
-                    <p className="upvotes-number">{upvotes}</p>
-                    <FontAwesomeIcon className="vote-icon" icon="fa-regular fa-circle-down" />
-                </div>
+                {renderVoteSection()}
                 <div className="post-container">
                     <h2 className="post-h2">{title}</h2>
                     {text && textElement}

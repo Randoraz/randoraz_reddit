@@ -20,3 +20,28 @@ export const convertUnixIntoDate = unix => {
 
     return result;
 }
+
+export const shortenNumbers = num => {
+    const units = ['k', 'M', 'B'];
+
+    for (let i = units.length; i > 0; i--) {
+        const decimal = 1000 ** i;
+
+        if(num > decimal)
+        {
+            const string = +(num/decimal).toString().slice(0, ((-2*i)-(i-1)));
+            return string + units[i-1];
+
+            // const roundNum = +(num/decimal).toFixed(1);
+            // if(roundNum === 1000)
+            //     return `${roundNum/1000}${units[i]}`
+
+            // return `${+(num/decimal).toFixed(1)}${units[i-1]}`;
+        }
+        else if(num === decimal) {
+            return `${(num/decimal)}${units[i-1]}`
+        }
+    }
+
+    return num;
+}

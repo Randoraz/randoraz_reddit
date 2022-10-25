@@ -1,6 +1,7 @@
 # Reddit Client
 
 Reddit Client created with React/Redux
+
 Deployed with Netlify on this [URL](randorazreddit.netlify.app)
 
 ## Table of Contents

@@ -119,36 +119,36 @@ const Post = ({post, toggleShowingComments}) => {
             case 'noVote':
                 return(
                     <div className="upvotes-container">
-                        <button className="upvote-button" onClick={() => handleUpVote()}>
-                            <FontAwesomeIcon className="vote-icon" icon="fa-regular fa-circle-up" />
+                        <button className="upvote-button" onClick={() => handleUpVote()} aria-label="Up Vote">
+                            <FontAwesomeIcon className="vote-icon" icon="fa-regular fa-circle-up" aria-hidden="true" />
                         </button>
                         <p className="upvotes-number">{shortenNumbers(upvotes)}</p>
-                        <button className="downvote-button" onClick={() => handleDownVote()}>
-                            <FontAwesomeIcon className="vote-icon" icon="fa-regular fa-circle-down" />
+                        <button className="downvote-button" onClick={() => handleDownVote()} aria-label="Down Vote">
+                            <FontAwesomeIcon className="vote-icon" icon="fa-regular fa-circle-down" aria-hidden="true" />
                         </button>
                     </div>
                 );
             case 'upVote':
                 return(
                     <div className="upvotes-container">
-                        <button className="upvote-button" onClick={() => handleUpVote()}>
-                            <FontAwesomeIcon className="vote-icon up-vote" icon="fa-regular fa-circle-up" />
+                        <button className="upvote-button" onClick={() => handleUpVote()} aria-label="Up Vote">
+                            <FontAwesomeIcon className="vote-icon up-vote" icon="fa-regular fa-circle-up" aria-hidden="true" />
                         </button>
                         <p className="upvotes-number up-vote">{shortenNumbers(upvotes)}</p>
-                        <button className="downvote-button" onClick={() => handleDownVote()}>
-                            <FontAwesomeIcon className="vote-icon" icon="fa-regular fa-circle-down" />
+                        <button className="downvote-button" onClick={() => handleDownVote()} aria-label="Down Vote">
+                            <FontAwesomeIcon className="vote-icon" icon="fa-regular fa-circle-down" aria-hidden="true" />
                         </button>
                     </div>
                 );
             case 'downVote':
                 return(
                     <div className="upvotes-container">
-                        <button className="upvote-button" onClick={() => handleUpVote()}>
-                            <FontAwesomeIcon className="vote-icon" icon="fa-regular fa-circle-up" />
+                        <button className="upvote-button" onClick={() => handleUpVote()} aria-label="Up Vote">
+                            <FontAwesomeIcon className="vote-icon" icon="fa-regular fa-circle-up" aria-hidden="true" />
                         </button>
                         <p className="upvotes-number down-vote">{shortenNumbers(upvotes)}</p>
-                        <button className="downvote-button" onClick={() => handleDownVote()}>
-                            <FontAwesomeIcon className="vote-icon down-vote" icon="fa-regular fa-circle-down" />
+                        <button className="downvote-button" onClick={() => handleDownVote()} aria-label="Down Vote">
+                            <FontAwesomeIcon className="vote-icon down-vote" icon="fa-regular fa-circle-down" aria-hidden="true" />
                         </button>
                     </div>
                 );
@@ -168,8 +168,8 @@ const Post = ({post, toggleShowingComments}) => {
                     <div className="post-info">
                         <p className="op">{author}</p>
                         <p className="post-time">{convertUnixIntoDate(postTime)}</p>
-                        <button className="comments-button" onClick={() => toggleShowingComments(post.permalink)}>
-                            <FontAwesomeIcon className="comment-icon" icon="fa-solid fa-message" style={{color: changeIconColor()}}/>
+                        <button className="comments-button" onClick={() => toggleShowingComments(post.permalink)} aria-label="Show Comments">
+                            <FontAwesomeIcon className="comment-icon" icon="fa-solid fa-message" style={{color: changeIconColor()}} aria-hidden="true" />
                         </button>
                     </div>
                 </div>        

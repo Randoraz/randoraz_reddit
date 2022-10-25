@@ -30,8 +30,10 @@ const Header = () => {
                 <FontAwesomeIcon id="reddit-icon" icon="fa-brands fa-square-reddit" />
             </div>
             <form id="search-form" onSubmit={handleSubmit}>
-                <input id="search-bar" type="text" placeholder="Search" value={searchTermLocal} onChange={handleLocalChange} />
-                <button type="submit" id="search-button"><FontAwesomeIcon icon="fa-solid fa-magnifying-glass" onClick={handleSubmit} /></button>
+                <input id="search-bar" type="text" placeholder="Search" value={searchTermLocal} onChange={handleLocalChange} aria-label="Search Posts" />
+                <button type="submit" id="search-button" aria-label="Search">
+                    <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" onClick={handleSubmit} aria-hidden="true" />
+                </button>
             </form>
         </header>
     )

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import './Posts.css';
 
 import Post from "../Post/Post";
-import { fetchPosts, loadingPosts, errorPosts, selectFilteredPosts, selectSubreddit, fetchComments, setShowingComments } from "../../store/redditSlice";
+import { fetchPosts, loadingPosts, errorPosts, selectFilteredPosts, selectSubreddit, fetchComments, setShowingComments, showAllPosts } from "../../store/redditSlice";
 
 
 const Posts = () => {
@@ -15,6 +15,7 @@ const Posts = () => {
     
     useEffect(() => {
         dispatch(fetchPosts(subreddit));
+        //eslint-disable-next-line
     }, [subreddit]);
 
     const toggleShowingComments = (index) => {
@@ -29,14 +30,22 @@ const Posts = () => {
 
         return getComments;
     }
-    
+
     const loading = <p id="loading-posts-message">Loading posts...</p>;
     const noPosts = <p id="no-posts-message">No posts matching the search term where found</p>;
     const errorMensage = <p id="error-message">Failed to load posts</p>;
 
     if(isLoading) return loading;
     if(error) return errorMensage;
-    if(posts.length === 0) return noPosts;
+
+    if(posts.length === 0) {
+        return (
+            <div id="posts">
+                {noPosts}
+                <button id="back-button" onClick={() => dispatch(showAllPosts())}>Back</button>
+            </div>
+        );
+    }
 
     return (
         <div id="posts">

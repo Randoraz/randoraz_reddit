@@ -30,6 +30,9 @@ export const redditSlice = createSlice({
         },
         setShowingComments(state, action) {
             state.filteredPosts[action.payload].showingComments = !state.filteredPosts[action.payload].showingComments;
+        },
+        showAllPosts(state, action) {
+            state.filteredPosts = state.posts;
         }
     },
     extraReducers: (builder) => {
@@ -87,7 +90,8 @@ export const {
     setSubreddit,
     setSearchTerm,
     getFilteredPosts,
-    setShowingComments
+    setShowingComments,
+    showAllPosts
 } = redditSlice.actions;
 
 export default redditSlice.reducer;

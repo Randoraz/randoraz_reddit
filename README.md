@@ -1,6 +1,7 @@
 # Reddit Client
 
 Reddit Client created with React/Redux
+Deployed with Netlify on this [URL](randorazreddit.netlify.app)
 
 ## Table of Contents
 
@@ -19,14 +20,15 @@ It uses Jest for testing some of its functions.
 This website is responsive and uses aria-labels for accessibility.
 It also contains a few CSS on hover events for more interactivity.
 
-## Tecnologies
+## Technologies
 
 + HTML5 / CSS
 + Javascript
 + React
-+ Redux
++ Redux Toolkit
 + Jest
 + Git / Github
++ Netlify
 + VSCode
 
 ## Sources

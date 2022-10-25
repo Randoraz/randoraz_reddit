@@ -170,6 +170,7 @@ const Post = ({post, toggleShowingComments}) => {
                         <p className="post-time">{convertUnixIntoDate(postTime)}</p>
                         <button className="comments-button" onClick={() => toggleShowingComments(post.permalink)} aria-label="Show Comments">
                             <FontAwesomeIcon className="comment-icon" icon="fa-solid fa-message" style={{color: changeIconColor()}} aria-hidden="true" />
+                            <p className="comments-number">{post.num_comments}</p>
                         </button>
                     </div>
                 </div>        

@@ -1,8 +1,8 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import './Post.css';
 import { fixUrl, shortenNumbers } from "../../utils/utils";
 import { Comment } from "../Comment/Comment";
+import { Gallery } from "../Gallery/Gallery";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { convertUnixIntoDate } from "../../utils/utils";
 
@@ -51,11 +51,14 @@ const Post = ({post, toggleShowingComments}) => {
         }
     }
 
-    const imgContainer = <div className="img-container">{
-                            images.map((image, index) => {
-                                return <img className="post-img" alt="" src={image} key={index} />;
-                            })
-                        }</div>;
+    const imgContainer = images.length > 1 ? <Gallery imgArray={images} /> : <img className="post-img" alt="" src={images[0]} />;
+    
+    
+                        // <div className="img-container">{
+                        //     images.map((image, index) => {
+                        //         return <img className="post-img" alt="" src={image} key={index} />;
+                        //     })
+                        // }</div>;
 
     const videoContainer = <div className="video-container">
                                 <iframe 

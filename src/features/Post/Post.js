@@ -38,12 +38,19 @@ const Post = ({post, toggleShowingComments}) => {
     
     if(postEmbed) {
         if(postEmbed.oembed) {
-            const html = postEmbed.oembed.html;
-            const initialIndex = html.indexOf('src') + 5;
-            const finalIndex = html.indexOf('width') - 2 - html.length;
-            video.url = html.slice(initialIndex, finalIndex);
-            video.url = video.url.replaceAll('&amp;', '&');
-            video.title = post.media.oembed.title;
+            if(postEmbed.oembed.provider_url.includes('youtube')) {
+                const providerUrl = 'https://www.youtube.com/embed/';
+                const videoID = post.url.slice(post.url.indexOf('=') + 1);
+                video.url = providerUrl + videoID;
+                video.title = postEmbed.oembed.title;
+            } else {
+                const html = postEmbed.oembed.html;
+                const initialIndex = html.indexOf('src') + 5;
+                const finalIndex = html.indexOf('width') - 2 - html.length;
+                video.url = html.slice(initialIndex, finalIndex);
+                video.url = video.url.replaceAll('&amp;', '&');
+                video.title = post.media.oembed.title;
+            }
         } else if(postEmbed.reddit_video) {
             const url = postEmbed.reddit_video.fallback_url;
             video.url = fixUrl(url);
@@ -51,7 +58,10 @@ const Post = ({post, toggleShowingComments}) => {
         }
     }
 
-    const imgContainer = images.length > 1 ? <Gallery imgArray={images} /> : <img className="post-img" alt="" src={images[0]} />;
+    const imgContainer = images.length > 1 ? <Gallery imgArray={images} /> :
+                        <figure className="img-container">
+                            <img className="post-img" alt="" src={images[0]} />
+                        </figure>;
     
     
                         // <div className="img-container">{
@@ -69,7 +79,8 @@ const Post = ({post, toggleShowingComments}) => {
                                     scrolling="no"
                                     frameBorder="0"
                                     allow="autoplay; fullscreen"
-                                    allowFullScreen={true}></iframe>
+                                    allowFullScreen={true}
+                                    style={{width: '100%', minHeight: 'fit-content'}}></iframe>
                         </div>
     
     const linkElement = <a className="external-link" href={link} target="_blank" rel="noreferrer" >{link}</a>;

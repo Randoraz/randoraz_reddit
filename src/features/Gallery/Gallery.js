@@ -33,12 +33,32 @@ export const Gallery = ({imgArray}) => {
             setPrevDisabled(false);
     }
 
+    const controlImgPos = index => {
+        if(index === currentImgIndex) {
+            return {
+                left: '50%',
+                transform: 'translateX(-50%)'
+            }
+        } else if(index < currentImgIndex) {
+            return {
+                left: '100%',
+                transform: 'translateX(0)'
+            }
+        } else {
+            return {
+                left: '-100%',
+                transform: 'translateX(0)'
+            }
+        }
+    }
 
     return (
-        <div id="gallery">
-            <div className="gallery-img-container">
-                <img className="gallery-img" alt="" src={imgArray[currentImgIndex]} />
-            </div>
+        <div className="gallery">
+            <figure className="slide">
+                {imgArray.map((img, index) => {
+                    return <img className="gallery-img" alt="" src={img} key={index} style={controlImgPos(index)} />
+                })}
+            </figure>
             <div className="img-nav-buttons-container">
                 <button className="prev-img-button" onClick={() => prevButton()} disabled={prevDisabled}>
                     <FontAwesomeIcon className="img-arrow-icon" icon="fa-regular fa-circle-left" aria-hidden="true" />

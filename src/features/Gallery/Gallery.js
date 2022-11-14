@@ -41,12 +41,12 @@ export const Gallery = ({imgArray}) => {
             }
         } else if(index < currentImgIndex) {
             return {
-                left: '100%',
+                left: '-100%',
                 transform: 'translateX(0)'
             }
         } else {
             return {
-                left: '-100%',
+                left: '100%',
                 transform: 'translateX(0)'
             }
         }

@@ -78,7 +78,20 @@
 }
 
 .video-container {
+    height: 100%;
     width: 100%;
+    position: relative;
+    padding-top: 56.25%;
+}
+
+.iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .post-img {
@@ -168,5 +181,11 @@
 
     .op, .post-time {
         font-size: 1.2rem;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .upvotes-container {
+        padding: 1.5% 7% 1.5% 1.5%;
     }
 }

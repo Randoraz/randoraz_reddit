@@ -72,10 +72,9 @@ const Post = ({post, toggleShowingComments}) => {
 
     const videoContainer = <div className="video-container">
                                 <iframe 
+                                    className="iframe"
                                     src={video.url} 
                                     title={video.title}
-                                    width="900px"
-                                    height="507px"
                                     scrolling="no"
                                     frameBorder="0"
                                     allow="autoplay; fullscreen"

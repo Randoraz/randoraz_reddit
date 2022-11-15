@@ -61,11 +61,17 @@
     }
 }
 
-@media only screen and (max-width: 950px) {
+@media only screen and (max-width: 850px) {
     #subreddits-h3 {
         font-size: 2rem;
     }
 
+    .subreddits-button {
+        font-size: 1.2rem;
+    }
+}
+
+@media only screen and (max-width: 730px) {
     .subreddits-button {
         font-size: 1rem;
     }

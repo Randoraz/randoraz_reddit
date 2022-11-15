@@ -182,10 +182,8 @@
     .op, .post-time {
         font-size: 1.2rem;
     }
-}
 
-@media only screen and (max-width: 500px) {
     .upvotes-container {
-        padding: 1.5% 7% 1.5% 1.5%;
+        width: 10%;
     }
 }

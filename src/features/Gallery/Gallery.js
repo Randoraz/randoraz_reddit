@@ -37,16 +37,17 @@ export const Gallery = ({imgArray}) => {
         if(index === currentImgIndex) {
             return {
                 left: '50%',
-                transform: 'translateX(-50%)'
+                transform: 'translateX(-50%)',
+                position: 'relative'
             }
         } else if(index < currentImgIndex) {
             return {
-                left: '-100%',
+                left: `-100%`,
                 transform: 'translateX(0)'
             }
         } else {
             return {
-                left: '100%',
+                left: `100%`,
                 transform: 'translateX(0)'
             }
         }

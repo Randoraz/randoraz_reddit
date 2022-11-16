@@ -14,7 +14,12 @@ export const Gallery = ({imgArray}) => {
         const newImgArray = Array.from(slideEl.current.childNodes);
 
         const setHeight = () => {
-            setSlideHeight({height: newImgArray[0].offsetHeight});
+            let newHeight = 0;
+            newImgArray.forEach(img => {
+                if(img.offsetHeight > newHeight)
+                    newHeight = img.offsetHeight;
+            })
+            setSlideHeight({height: newHeight});
         }
 
         newImgArray.forEach((img, index) => {

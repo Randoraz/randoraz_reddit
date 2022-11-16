@@ -15,7 +15,6 @@
 }
 
 .gallery-img {
-    will-change: left, transform, position;
     max-width: 100%;
     max-height: 70vh;
     border-radius: 5px;
@@ -71,5 +70,11 @@
     .next-img-button, .prev-img-button {
         height: 10%;
         width: 10%;
+    }
+}
+
+@media only screen and (min-width: 1025px) {
+    .gallery-img {
+        will-change: left, transform, position;
     }
 }

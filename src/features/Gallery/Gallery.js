@@ -76,13 +76,13 @@ export const Gallery = ({imgArray}) => {
             }
         } else if(index < currentImgIndex) {
             return {
-                left: `-100%`,
+                left: `-101%`,
                 transform: 'translateX(0)',
                 position: 'absolute'
             }
         } else {
             return {
-                left: `100%`,
+                left: `101%`,
                 transform: 'translateX(0)',
                 position: 'absolute'
             }

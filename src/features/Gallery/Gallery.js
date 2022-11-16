@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './Gallery.css';
 
@@ -6,6 +6,34 @@ export const Gallery = ({imgArray}) => {
     const [currentImgIndex, setCurrentImgIndex] = useState(0);
     const [prevDisabled, setPrevDisabled] = useState(true);
     const [nextDisabled, setNextDisabled] = useState(false);
+    const [slideHeight, setSlideHeight] = useState({height: '100%'});
+
+    const slideEl = useRef(null);
+
+    useEffect(() => {
+        const newImgArray = Array.from(slideEl.current.childNodes);
+
+        const setHeight = () => {
+            setSlideHeight({height: newImgArray[0].offsetHeight});
+            newImgArray.forEach((img, index) => {
+                const styles = controlImgPos(index);
+                img.style.left = styles.left;
+                img.style.transform = styles.transform;
+                img.style.position = styles.position;
+            })
+        }
+        
+        window.addEventListener("resize", setHeight);
+        
+        if (newImgArray[0].complete) {
+            setHeight();
+          } else {
+            newImgArray[0].addEventListener('load', setHeight);
+            return () => newImgArray[0].removeEventListener('load', setHeight);
+        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const nextButton = () => {
         if(currentImgIndex === imgArray.length - 1)
@@ -38,25 +66,30 @@ export const Gallery = ({imgArray}) => {
             return {
                 left: '50%',
                 transform: 'translateX(-50%)',
-                position: 'relative'
+                position: 'absolute'
             }
         } else if(index < currentImgIndex) {
             return {
                 left: `-100%`,
-                transform: 'translateX(0)'
+                transform: 'translateX(0)',
+                position: 'absolute'
             }
         } else {
             return {
                 left: `100%`,
-                transform: 'translateX(0)'
+                transform: 'translateX(0)',
+                position: 'absolute'
             }
         }
     }
 
     return (
         <div className="gallery">
-            <figure className="slide">
+            <figure className="slide" ref={slideEl} style={slideHeight}>
                 {imgArray.map((img, index) => {
+                    if(index === 0)
+                        return <img className="gallery-img" alt="" src={img} key={index} style={controlImgPos(index)} />
+
                     return <img className="gallery-img" alt="" src={img} key={index} style={controlImgPos(index)} />
                 })}
             </figure>

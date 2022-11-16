@@ -15,13 +15,14 @@ export const Gallery = ({imgArray}) => {
 
         const setHeight = () => {
             setSlideHeight({height: newImgArray[0].offsetHeight});
-            newImgArray.forEach((img, index) => {
-                const styles = controlImgPos(index);
-                img.style.left = styles.left;
-                img.style.transform = styles.transform;
-                img.style.position = styles.position;
-            })
         }
+
+        newImgArray.forEach((img, index) => {
+            const styles = controlImgPos(index);
+            img.style.left = styles.left;
+            img.style.transform = styles.transform;
+            img.style.position = styles.position;
+        });
         
         window.addEventListener("resize", setHeight);
         

@@ -7,11 +7,13 @@ export const Gallery = ({imgArray}) => {
     const [prevDisabled, setPrevDisabled] = useState(true);
     const [nextDisabled, setNextDisabled] = useState(false);
     const [slideHeight, setSlideHeight] = useState({height: '100%'});
+    const [imgElArray, setImgElArray] = useState([]);
 
     const slideEl = useRef(null);
 
     useEffect(() => {
         const newImgArray = Array.from(slideEl.current.childNodes);
+        setImgElArray(newImgArray);
 
         const setHeight = () => {
             let newHeight = 0;
@@ -52,6 +54,8 @@ export const Gallery = ({imgArray}) => {
             setNextDisabled(true);
         else
             setNextDisabled(false);
+
+        handleIndexChange('plus');
     }
 
     const prevButton = () => {
@@ -65,6 +69,29 @@ export const Gallery = ({imgArray}) => {
             setPrevDisabled(true);
         else
             setPrevDisabled(false);
+
+        handleIndexChange('minus');
+    }
+
+    const handleIndexChange = operation => {
+        switch(operation) {
+            case 'plus':
+                imgElArray[currentImgIndex].style.left = '-101%';
+                imgElArray[currentImgIndex].style.transform = 'translateX(0)';
+
+                imgElArray[currentImgIndex + 1].style.left = '50%';
+                imgElArray[currentImgIndex + 1].style.transform = 'translateX(-50%)';
+                return;
+            case 'minus':
+                imgElArray[currentImgIndex].style.left = '101%';
+                imgElArray[currentImgIndex].style.transform = 'translateX(0)';
+
+                imgElArray[currentImgIndex - 1].style.left = '50%';
+                imgElArray[currentImgIndex - 1].style.transform = 'translateX(-50%)';
+                return;
+            default:
+                return;
+        }
     }
 
     const controlImgPos = index => {
@@ -93,10 +120,7 @@ export const Gallery = ({imgArray}) => {
         <div className="gallery">
             <figure className="slide" ref={slideEl} style={slideHeight}>
                 {imgArray.map((img, index) => {
-                    if(index === 0)
-                        return <img className="gallery-img" alt="" src={img} key={index} style={controlImgPos(index)} />
-
-                    return <img className="gallery-img" alt="" src={img} key={index} style={controlImgPos(index)} />
+                    return <img className="gallery-img" alt="" src={img} key={index} />
                 })}
             </figure>
             <div className="img-nav-buttons-container">

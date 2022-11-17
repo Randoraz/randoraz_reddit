@@ -1,7 +1,7 @@
-import React, {useEffect} from "react";
+import React, { useState, useEffect} from "react";
 import './Subreddits.css';
 import { setSubreddit } from "../../store/redditSlice";
-import { fetchSubreddits, selectSubreddits, loadingSubreddits, errorSubreddits } from "../../store/subredditSlice";
+import { fetchSubreddits, selectSubreddits, loadingSubreddits, errorSubreddits, selectDisplayMenu } from "../../store/subredditSlice";
 import { selectSubreddit } from "../../store/redditSlice";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -11,7 +11,10 @@ const Subreddits = () => {
     const subreddits = useSelector(selectSubreddits);
     const isLoading = useSelector(loadingSubreddits);
     const error = useSelector(errorSubreddits);
+    const displayMenu = useSelector(selectDisplayMenu);
     const selectedSubreddit = useSelector(selectSubreddit);
+
+    const [windowSize, setWindowSize] = useState(window.innerWidth);
 
     useEffect(() => {
         if(subreddits.length !== 0)
@@ -20,11 +23,26 @@ const Subreddits = () => {
         dispatch(fetchSubreddits());
     }, [dispatch, subreddits]);
 
-    if(isLoading) return <p id="loading-message">Loading...</p>;
-    if(error) return <p id="error-message">Failed to load subreddits list</p>;
+    useEffect(() => {
+        const onWindowResize = () => {
+            setWindowSize(window.innerWidth);
+        }
+
+        window.addEventListener("resize", onWindowResize);
+    }, [])
+
+    const handleDisplayMenu = () => {
+        if(displayMenu || windowSize > 630)
+            return 'block';
+
+        return 'none';
+    }
+
+    if(isLoading) return <p id="loading-message"  style={{display: handleDisplayMenu()}}>Loading...</p>;
+    if(error) return <p id="error-message" style={{display: handleDisplayMenu()}}>Failed to load subreddits list</p>;
 
     return (
-        <div id="subreddits">
+        <div id="subreddits" style={{display: handleDisplayMenu()}}>
             <h3 id="subreddits-h3">Subreddits</h3>
             <ul id="subreddits-list">
             {subreddits.map(subreddit => {

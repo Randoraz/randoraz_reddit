@@ -6,7 +6,13 @@ export const subredditSlice = createSlice({
     initialState: {
         subreddits: [],
         loading: false,
-        error: false
+        error: false,
+        displayMenu: false
+    },
+    reducers: {
+        setDisplayMenu(state, action) {
+            state.displayMenu = !state.displayMenu;
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -31,6 +37,11 @@ export const subredditSlice = createSlice({
 export const selectSubreddits = (state) => state.subreddit.subreddits;
 export const loadingSubreddits = (state) => state.subreddit.loading;
 export const errorSubreddits = (state) => state.subreddit.error;
+export const selectDisplayMenu = (state) => state.subreddit.displayMenu;
+
+export const {
+    setDisplayMenu
+} = subredditSlice.actions;
 
 export default subredditSlice.reducer;
 

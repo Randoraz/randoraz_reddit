@@ -53,6 +53,7 @@
 #loading-message, #error-message {
     margin: 2rem;
     font-size: 2rem;
+    color: white;
 }
 
 @media only screen and (max-width: 1200px) {
@@ -76,3 +77,30 @@
         font-size: 1rem;
     }
 }
+
+@media only screen and (max-width: 630px) {
+    #subreddits {
+        border: 0.2rem solid var(--orange);
+        width: 40vw;
+        position: absolute;
+        right: 0;
+        min-height: 50vh;
+        z-index: 100;
+    }
+
+    .subreddits-button {
+        font-size: 1.2rem;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    #subreddits {
+        width: 50vw;
+    }
+  }
+  
+  @media only screen and (max-width: 425px) {
+    #subreddits {
+        width: 60vw;
+    }
+  }

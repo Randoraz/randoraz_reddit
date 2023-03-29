@@ -23,11 +23,24 @@ const Post = ({post, toggleShowingComments}) => {
         url: '',
         title: ''
     };
-    let link;
+    let link = '';
     if(postMetadata) {
         Object.keys(postMetadata).forEach((image) => {
-            const fixedUrl = fixUrl(postMetadata[image].s.u);
-            images.push(fixedUrl);
+            if(postMetadata[image].e === "Image") {
+                const differentSizedImgArray = postMetadata[image].p;
+                if(differentSizedImgArray) {
+                    const properSizedImgArray = differentSizedImgArray.filter(img => {
+                        return img.x <= 925;
+                    });
+                    const fixedUrl = fixUrl(properSizedImgArray[properSizedImgArray.length - 1].u);
+                    images.push(fixedUrl);
+                } else if(postMetadata[image].s) {
+                    const fixedUrl = fixUrl(postMetadata[image].s.u);
+                    images.push(fixedUrl);
+                };
+            } else {
+                link = post.url;
+            }
         });
     } else if(post.url) {
         if(post.url.includes('.gif') || post.url.includes('.jpg') || post.url.includes('.jpeg') || post.url.includes('.png') || post.url.includes('.webp'))
@@ -62,13 +75,6 @@ const Post = ({post, toggleShowingComments}) => {
                         <figure className="img-container">
                             <img className="post-img" alt="" src={images[0]} />
                         </figure>;
-    
-    
-                        // <div className="img-container">{
-                        //     images.map((image, index) => {
-                        //         return <img className="post-img" alt="" src={image} key={index} />;
-                        //     })
-                        // }</div>;
 
     const videoContainer = <div className="video-container">
                                 <iframe 

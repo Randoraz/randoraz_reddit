@@ -54,8 +54,8 @@ const Subreddits = () => {
                                 <img
                                     className="subreddits-img"
                                     alt=""
-                                    src={subreddit.icon_img || `https://api.adorable.io/avatars/25/${subreddit.display_name}`}
-                                    style={{ borderColor: `${subreddit.primary_color}` }} />
+                                    src={subreddit.icon_img || `https://static-00.iconduck.com/assets.00/reddit-icon-256x256-qtf6g5el.png`}
+                                    style={{ borderColor: `${subreddit.primary_color ? subreddit.primary_color : 'white'}`, backgroundColor: `${subreddit.primary_color ? subreddit.primary_color : 'white'}` }} />
                                 {subreddit.display_name}
                         </button>
                     </li>

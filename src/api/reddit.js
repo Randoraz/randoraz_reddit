@@ -1,7 +1,7 @@
 const rootAPI = 'https://www.reddit.com/';
 
 export const getRedditPosts = async (subreddit) => {
-    const response = await fetch(`${rootAPI}${subreddit}.json`);
+    const response = await fetch(`${rootAPI}${subreddit}.json`, { cache: "default" });
     const json = await response.json();
     console.log(json);
 
@@ -9,7 +9,7 @@ export const getRedditPosts = async (subreddit) => {
 };
 
 export const getSubreddits = async () => {
-    const response = await fetch(`${rootAPI}/subreddits.json`);
+    const response = await fetch(`${rootAPI}/subreddits.json`, { cache: "default" });
     const json = await response.json();
     console.log(json);
   
@@ -17,7 +17,7 @@ export const getSubreddits = async () => {
   };
 
 export const getPostComments = async (permalink) => {
-    const response = await fetch(`${rootAPI}${permalink}.json`);
+    const response = await fetch(`${rootAPI}${permalink}.json`, { cache: "default" });
     console.log(`${rootAPI}${permalink}.json`);
     const json = await response.json();
     console.log(json);

@@ -124,10 +124,10 @@ export const Gallery = ({imgArray}) => {
                 })}
             </figure>
             <div className="img-nav-buttons-container">
-                <button className="prev-img-button" onClick={() => prevButton()} disabled={prevDisabled}>
+                <button className="prev-img-button" aria-label="Previous Image Button" onClick={() => prevButton()} disabled={prevDisabled}>
                     <FontAwesomeIcon className="img-arrow-icon" icon="fa-regular fa-circle-left" aria-hidden="true" />
                 </button>
-                <button className="next-img-button" onClick={() => nextButton()} disabled={nextDisabled}>
+                <button className="next-img-button" aria-label="Next Image Button" onClick={() => nextButton()} disabled={nextDisabled}>
                     <FontAwesomeIcon className="img-arrow-icon" icon="fa-regular fa-circle-right" aria-hidden="true" />
                 </button>
             </div>

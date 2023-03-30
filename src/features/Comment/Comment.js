@@ -3,7 +3,8 @@ import ReactMarkdown from "react-markdown";
 import './Comment.css';
 
 export const Comment = ({comment}) => {
-    const replies = comment.replies.data ? comment.replies.data.children.map(reply => reply.data) : [];
+    const repliesObjects = comment.replies ? comment.replies.data.children : [];
+    const replies = repliesObjects.filter(reply => reply.kind === 't1').map(reply => reply.data);
 
     return (
         <div className="comment">

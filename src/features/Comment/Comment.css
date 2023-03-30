@@ -2,6 +2,10 @@
     font-size: 1.8rem;
 }
 
+.comment a {
+    color: var(--blue);
+}
+
 .comment-author, .reply-author {
     color: var(--orange);
     margin: 1rem;

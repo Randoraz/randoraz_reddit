@@ -2,16 +2,24 @@
     font-size: 1.8rem;
 }
 
-.comment-author {
+.comment-author, .reply-author {
     color: var(--orange);
     margin: 1rem;
 }
 
-.comment-body {
+.comment-body, .reply-body {
     color: white;
     margin: 1rem;
     padding-bottom: 0.5rem;
     border-bottom: 0.1rem solid var(--orange);
+}
+
+.reply-author {
+    margin: 1rem 3rem;
+}
+
+.reply-body {
+    margin: 1rem 3rem;
 }
 
 @media only screen and (max-width: 520px) {

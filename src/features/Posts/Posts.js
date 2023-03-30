@@ -27,7 +27,7 @@ const Posts = () => {
             if(!posts[index].showingComments)
                 dispatch(fetchComments(postData));
         }
-
+        
         return getComments;
     }
 
@@ -42,7 +42,7 @@ const Posts = () => {
         return (
             <div id="posts">
                 {noPosts}
-                <button id="back-button" onClick={() => dispatch(showAllPosts())}>Back</button>
+                <button id="back-button" aria-label="Back Button" onClick={() => dispatch(showAllPosts())}>Back</button>
             </div>
         );
     }

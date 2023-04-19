@@ -1,5 +1,6 @@
 header {
     height: 7vh;
+    background-color: black;
     border-bottom: 0.1rem solid #EEE;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -104,6 +105,10 @@ header:hover::before {
 @media only screen and (max-width: 630px) {
     header {
         grid-template-columns: 1fr 2fr 0.1fr;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
     }
 
     #subreddit-menu-button {

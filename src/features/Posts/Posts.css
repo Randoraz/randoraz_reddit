@@ -1,3 +1,7 @@
+#posts {
+    width: 100%;
+}
+
 #loading-posts-message, #no-posts-message, #error-message {
     color: white;
     font-size: 2rem;

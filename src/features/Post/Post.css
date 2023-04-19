@@ -3,14 +3,16 @@
     margin: 1.2rem auto;
     border-radius: 5px;
     padding: 0.1%;
+    width: 100%;
 }
 
 .post-flex-container {
     display: flex;
+    width: 100%;
 }
 
 .post-container {
-    width: 100%;
+    width: 92%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -20,7 +22,7 @@
 .upvotes-container {
     color: white;
     padding: 1.5% 2% 1.5% 1.5%;
-    width: 5%;
+    width: 8%;
     text-align: center;
 }
 
@@ -161,6 +163,13 @@
 }
 
 @media only screen and (max-width: 950px) {
+    .post-container {
+        width: 90%;
+    }
+
+    .upvotes-container {
+        width: 10%;
+    }
     .post-h2 {
         font-size: 2rem;
     }
@@ -172,7 +181,11 @@
 
 @media only screen and (max-width: 630px) {
     .post-container {
-        width: 90%;
+        width: 88%;
+    }
+
+    .upvotes-container {
+        width: 12%;
     }
 
     .external-link {
@@ -181,9 +194,5 @@
 
     .op, .post-time {
         font-size: 1.2rem;
-    }
-
-    .upvotes-container {
-        width: 10%;
     }
 }

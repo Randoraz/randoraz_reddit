@@ -9,6 +9,7 @@ Deployed with Netlify on this [URL](https://randorazreddit.netlify.app)
 + Description
 + Tecnologies
 + Sources
++ Credits
 
 ## Description
 
@@ -35,3 +36,8 @@ It also contains a few CSS on hover events for more interactivity.
 ## Sources
 
 This project was created for the Reddit Client project from [Codecademy's Full-Stack Engineer Career Path](https://www.codecademy.com/learn/paths/full-stack-engineer-career-path).
+
+
+## Credits
+
+The Reddit favicon was made by [Abhishek Pipalva](https://icons-for-free.com/icons-author-Abhishek+Pipalva/).

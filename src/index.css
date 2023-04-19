@@ -6,6 +6,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -53,6 +54,7 @@ aside {
   main {
     width: 97%;
     text-align: center;
+    margin-top: 7vh;
   }
 }
 
